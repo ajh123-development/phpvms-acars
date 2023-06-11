@@ -9,18 +9,24 @@ class LoginWindow(tk.Frame):
         self.parent = parent
         self.login_callback = login_callback
 
-        self.label = tk.Label(self, text="Enter API Key:")
+        self.label = tk.Label(self, text="Enter phpVMS URL:")
         self.label.pack()
 
-        self.entry = tk.Entry(self, show="*")
+        self.entry = tk.Entry(self)
         self.entry.pack()
+
+        self.label2 = tk.Label(self, text="Enter API Key:")
+        self.label2.pack()
+
+        self.entry2 = tk.Entry(self, show="*")
+        self.entry2.pack()
 
         self.button = tk.Button(self, text="Login", command=self.login)
         self.button.pack()
 
     def login(self):
-        api_key: str = self.entry.get()
-        base_url: str = "https://vms.minersonline.tk"
+        api_key: str = self.entry2.get()
+        base_url: str = self.entry.get()
 
         try:
             api_handler: ApiHandler = ApiHandler(api_key, base_url)
