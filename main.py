@@ -7,7 +7,7 @@ class AppController:
     def __init__(self):
         self.root = tk.Tk()
         self.root.title("Main Window")
-        self.root.geometry("300x200")
+        self.root.geometry("400x500")
         self.root.iconify()
 
         self.main_window = MainWindow(self.root)
