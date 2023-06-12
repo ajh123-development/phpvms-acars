@@ -19,6 +19,8 @@ class MainWindow(tk.Frame):
 
         self.details_label = tk.Label(self, text="Pilot Name: ")
         self.details_label.pack()
+        self.airlineDetails_label = tk.Label(self, text="Airline: ")
+        self.airlineDetails_label.pack()
 
         self.update()
 
@@ -28,7 +30,9 @@ class MainWindow(tk.Frame):
         if self.api_handler is not None:
             try:
                 self.user = self.api_handler.fetch_pilot_user()
-                pilot_name = self.user.name  # Assuming 'name' is a property of the PilotUser class
-                self.details_label.configure(text=f"Pilot Name: {pilot_name}")
+                self.details_label.configure(text=f"Pilot Name: {self.user.name}")
+                self.airlineDetails_label.configure(text=f"Airline: {self.user.airline.name}")
+
+                print(self.api_handler.fetch_pireps())
             except Exception as e:
                 messagebox.showerror("Error", str(e))
