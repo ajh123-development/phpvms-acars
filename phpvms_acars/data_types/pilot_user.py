@@ -1,3 +1,4 @@
+from typing import List
 from .airline import Airline
 from .bid import Bid
 from .rank import Rank
@@ -20,5 +21,5 @@ class PilotUser:
         self.timezone = data['data']['timezone']
         self.state = data['data']['state']
         self.airline = Airline(data['data']['airline'])
-        self.bids = [Bid(bid) for bid in data['data']['bids']]
+        self.bids: List[Bid] = [Bid(bid) for bid in data['data']['bids']]
         self.rank = Rank(data['data']['rank'])

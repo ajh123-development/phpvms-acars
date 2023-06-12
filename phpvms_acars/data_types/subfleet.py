@@ -1,3 +1,4 @@
+from typing import List
 from .fare import Fare
 from .aircraft import Aircraft
 
@@ -18,5 +19,5 @@ class Subfleet:
         self.gross_weight = data['gross_weight']
         self.created_at = data['created_at']
         self.updated_at = data['updated_at']
-        self.fares = [Fare(fare) for fare in data['fares']]
-        self.aircraft = [Aircraft(aircraft) for aircraft in data['aircraft']]
+        self.fares: List[Fare] = [Fare(fare) for fare in data['fares']]
+        self.aircraft: List[Aircraft] = [Aircraft(aircraft) for aircraft in data['aircraft']]
