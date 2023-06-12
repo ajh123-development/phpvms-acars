@@ -33,6 +33,6 @@ class MainWindow(tk.Frame):
                 self.details_label.configure(text=f"Pilot Name: {self.user.name}")
                 self.airlineDetails_label.configure(text=f"Airline: {self.user.airline.name}")
 
-                print(self.api_handler.fetch_pireps())
+                print(self.api_handler.fetch_pireps().data[0].id)
             except Exception as e:
                 messagebox.showerror("Error", str(e))

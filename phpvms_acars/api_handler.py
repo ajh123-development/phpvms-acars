@@ -3,7 +3,7 @@ from .data_types.pirep_data import PirepData
 from .data_types.pilot_user import PilotUser
 
 class ApiHandler:
-    def __init__(self, api_key, base_url):
+    def __init__(self, api_key: str, base_url: str):
         self.api_key = api_key
         self.base_url = base_url
 
@@ -27,8 +27,8 @@ class ApiHandler:
         except requests.exceptions.RequestException as e:
             raise Exception(str(e))
 
-    def fetch_pireps(self) -> PirepData:
-        url = f"{self.base_url}/api/pireps"
+    def fetch_pireps(self, page: int = 0) -> PirepData:
+        url = f"{self.base_url}/api/pireps?page={page}"
         headers = {
             'X-API-Key': self.api_key,
             'Content-type': 'application/json'
@@ -48,7 +48,7 @@ class ApiHandler:
             raise Exception(str(e))
 
     @staticmethod
-    def format_error(error) -> str:
+    def format_error(error: str) -> str:
         code = error['code']
         http_code = error['http_code']
         message = error['message']
