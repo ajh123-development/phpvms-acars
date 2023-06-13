@@ -3,6 +3,10 @@ import tkinter as tk
 from tkinter import messagebox
 from tkinter import Menu
 from ..api_handler import ApiHandler
+from ..data_types.acars.position import AcarsPosition
+from ..data_types.acars import status
+from ..data_types.acars.update import AcarsUpdate
+from ..data_types.pirep_item import PirepItem
 
 class MainWindow(tk.Frame):
     def __init__(self, parent: tk.Tk):
@@ -28,6 +32,12 @@ class MainWindow(tk.Frame):
 
         self.update()
 
+    def testPirep(self, pirep: PirepItem):
+        try:
+            self.api_handler.post_acars_update(pirep.id, AcarsUpdate(60, 20, status.AIRBORNE))
+        except Exception as e:
+            messagebox.showerror("Error", str(e))
+    
     def update(self):
         super().update()  # Call the update method from the tk.Frame superclass
 
@@ -42,7 +52,11 @@ class MainWindow(tk.Frame):
                     del self.pireps[i]
                 pireps = self.api_handler.fetch_pireps()
                 for i in range(len(pireps.data)):
-                    pirep = tk.Button(self, text=f"Flight: {pireps.data[i].flight_number} ID: {pireps.data[i].id}")
+                    pirep = tk.Button(
+                        self, 
+                        text=f"Flight: {pireps.data[i].flight_number} ID: {pireps.data[i].id}",
+                        command=lambda: self.testPirep(pireps.data[i])
+                    )
                     pirep.pack()
                     self.pireps.append(pirep)                
             except Exception as e:

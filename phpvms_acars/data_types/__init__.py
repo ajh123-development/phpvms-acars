@@ -1,3 +1,4 @@
+from .acars import *
 from .aircraft import Aircraft
 from .airline import Airline
 from .airport import Airport
