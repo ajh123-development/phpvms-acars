@@ -36,7 +36,7 @@ def post(website, datax): # POST request, returns http response as an object
         return str(e)
 
 def isLatestVersion():
-    data = requests.get('https://raw.githubusercontent.com/ajh123-development/phpvms-acars/update-system/updates.json').json()
+    data = requests.get('https://raw.githubusercontent.com/ajh123-development/phpvms-acars/main/update-system/updates.json').json()
     return (config.getPreRel == True and str(data["latestBeta"]) == config.version) or str(data["latestStable"]) == config.version
 
 def delete(x): # For future use
